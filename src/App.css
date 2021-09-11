@@ -58,6 +58,15 @@ tr {
   text-align: center;
 }
 
+.card-container {
+  margin-top: 75em;
+}
+
 .card {
-  width: 18rem;
+  margin: 1em;
+  width: 22rem;
+}
+
+.card img {
+  width: 100%;
 }
