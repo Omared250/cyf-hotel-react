@@ -18,10 +18,6 @@
   font-weight: bold;
 }
 
-.App-header img {
-  margin-top: 11em;
-}
-
 .App-title {
   font-size: 1.5em;
 }
@@ -56,10 +52,6 @@ tr {
 .footer {
   padding-top: 20px;
   text-align: center;
-}
-
-.card-container {
-  margin-top: 75em;
 }
 
 .card {
