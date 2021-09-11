@@ -1,6 +1,7 @@
 import React from "react";
 import Heading from "./components/Heading";
 import TouristInfoCards from "./components/TouristInfoCards";
+import Footer from "./components/Footer";
 
 import Bookings from "./components/Bookings";
 import "./App.css";
@@ -30,6 +31,7 @@ const App = () => {
           cityDescription="London is the capital and largest city of England and the United Kingdom.3 4 Situated on the banks of the River Thames, London has been an important human settlement since it was founded by the Romans with the name of Londinium almost two millennia ago"
         />
       </div>
+      <Footer />
     </div>
   );
 };
