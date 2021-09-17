@@ -63,3 +63,7 @@ tr {
 .card img {
   width: 100%;
 }
+
+.orders {
+  padding-top: 10px;
+}
