@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import moment from "moment";
 
 const nights = (a, b) => {
@@ -8,19 +8,31 @@ const nights = (a, b) => {
   return firstMoment.diff(secondMoment, "days");
 };
 
-const TableRow = props => (
-  <tr>
-    <th scope="row">{props.booking.id}</th>
-    <td>{props.booking.title}</td>
-    <td>{props.booking.firstName}</td>
-    <td>{props.booking.surname}</td>
-    <td>{props.booking.email}</td>
-    <td>{props.booking.roomId}</td>
-    <td>{props.booking.checkInDate}</td>
-    <td>{props.booking.checkOutDate}</td>
-    <td>{nights(props.booking.checkOutDate, props.booking.checkInDate)}</td>
-  </tr>
-);
+const TableRow = props => {
+  const [highlightColor, setHighlightColor] = useState("none");
+
+  const changeHighlightColor = () => {
+    if (highlightColor === "none") {
+      setHighlightColor("changeColor");
+    } else {
+      setHighlightColor("none");
+    }
+  };
+
+  return (
+    <tr className={highlightColor} onClick={changeHighlightColor}>
+      <th scope="row">{props.booking.id}</th>
+      <td>{props.booking.title}</td>
+      <td>{props.booking.firstName}</td>
+      <td>{props.booking.surname}</td>
+      <td>{props.booking.email}</td>
+      <td>{props.booking.roomId}</td>
+      <td>{props.booking.checkInDate}</td>
+      <td>{props.booking.checkOutDate}</td>
+      <td>{nights(props.booking.checkOutDate, props.booking.checkInDate)}</td>
+    </tr>
+  );
+};
 
 const SearchResults = props => (
   <table className="table text-center">

@@ -67,3 +67,7 @@ tr {
 .orders {
   padding-top: 10px;
 }
+
+.changeColor {
+  background-color: rgb(182, 243, 243);
+}
