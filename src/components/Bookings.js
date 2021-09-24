@@ -4,10 +4,6 @@ import SearchResults from "./SearchResults.js";
 // import FakeBookings from "../data/fakeBookings.json";
 
 const Bookings = () => {
-  const search = searchVal => {
-    console.info("TO DO!", searchVal);
-  };
-
   const [bookings, setBookings] = useState([]);
 
   useEffect(() => {
@@ -17,6 +13,16 @@ const Bookings = () => {
         setBookings(data);
       });
   }, []);
+
+  const search = searchVal => {
+    const infoArray = bookings.filter(booking => {
+      return (
+        booking.firstName.toLowerCase().includes(searchVal.toLowerCase()) ||
+        booking.surname.toLowerCase().includes(searchVal.toLowerCase())
+      );
+    });
+    setBookings(infoArray);
+  };
 
   return (
     <div className="App-content">
