@@ -9,13 +9,13 @@ const nights = (a, b) => {
 };
 
 const TableRow = props => {
-  const [highlightColor, setHighlightColor] = useState("none");
+  const [highlightColor, setHighlightColor] = useState();
 
   const changeHighlightColor = () => {
-    if (highlightColor === "none") {
+    if (highlightColor === undefined) {
       setHighlightColor("changeColor");
     } else {
-      setHighlightColor("none");
+      setHighlightColor();
     }
   };
 
