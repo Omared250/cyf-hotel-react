@@ -14,9 +14,11 @@ const Bookings = () => {
   useEffect(() => {
     setIsLoading(true);
 
-    fetch(`https://cyf-react.glitch.me`)
+    fetch(`https://cyf-react.glitch.me/error`)
       .then(res => res.json())
       .then(data => {
+        if (data.error) throw new Error(data.error);
+
         const searchInfo = searchVal
           ? // filter the result of the fetch with the value of the input
             data.filter(
@@ -28,6 +30,10 @@ const Bookings = () => {
         // assigning the result of the filtered values where if the input is empty it will show all the information about bookings
         setBookings(searchInfo);
         setIsLoading(false);
+      })
+      .catch(e => {
+        setError(e.message);
+        setIsLoading(false);
       });
     // keep tracking the value of the input to re-render the page with the new value
   }, [searchVal]);
@@ -36,6 +42,7 @@ const Bookings = () => {
     <div className="App-content">
       <div className="container">
         <Search search={setSearchVal} />
+        {error && <p>{error}</p>}
         {isLoading ? (
           <p>Loading....</p>
         ) : (
