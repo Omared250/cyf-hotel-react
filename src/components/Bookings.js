@@ -1,34 +1,50 @@
 import React, { useEffect, useState } from "react";
+import CustomerProfile from "./CustomerProfile.js";
 import Search from "./Search.js";
 import SearchResults from "./SearchResults.js";
 // import FakeBookings from "../data/fakeBookings.json";
 
 const Bookings = () => {
   const [bookings, setBookings] = useState([]);
+  const [searchVal, setSearchVal] = useState("");
+  const [customerProfileId, setCustomerProfileId] = useState();
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState();
 
   useEffect(() => {
+    setIsLoading(true);
+
     fetch(`https://cyf-react.glitch.me`)
       .then(res => res.json())
       .then(data => {
-        setBookings(data);
+        const searchInfo = searchVal
+          ? // filter the result of the fetch with the value of the input
+            data.filter(
+              value =>
+                value.firstName.toLowerCase() === searchVal.toLowerCase() ||
+                value.surname.toLowerCase() === searchVal.toLowerCase()
+            )
+          : data;
+        // assigning the result of the filtered values where if the input is empty it will show all the information about bookings
+        setBookings(searchInfo);
+        setIsLoading(false);
       });
-  }, []);
-
-  const search = searchVal => {
-    const infoArray = bookings.filter(booking => {
-      return (
-        booking.firstName.toLowerCase().includes(searchVal.toLowerCase()) ||
-        booking.surname.toLowerCase().includes(searchVal.toLowerCase())
-      );
-    });
-    setBookings(infoArray);
-  };
+    // keep tracking the value of the input to re-render the page with the new value
+  }, [searchVal]);
 
   return (
     <div className="App-content">
       <div className="container">
-        <Search search={search} />
-        <SearchResults results={bookings} />
+        <Search search={setSearchVal} />
+        {isLoading ? (
+          <p>Loading....</p>
+        ) : (
+          <SearchResults
+            results={bookings}
+            onShowCustomerProfile={setCustomerProfileId}
+          />
+        )}
+        {customerProfileId && <CustomerProfile id={customerProfileId} />}
       </div>
     </div>
   );

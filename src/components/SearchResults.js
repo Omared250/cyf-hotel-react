@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import moment from "moment";
-import CustomerProfile from "./CustomerProfile";
 
 const nights = (a, b) => {
   const firstMoment = moment(a);
@@ -10,22 +9,11 @@ const nights = (a, b) => {
 };
 
 const TableRow = props => {
-  const [highlightColor, setHighlightColor] = useState();
-
-  const changeHighlightColor = () => {
-    if (highlightColor === undefined) {
-      setHighlightColor("changeColor");
-    } else {
-      setHighlightColor();
-    }
-  };
-
-  const handleProfile = () => {
-    return props.booking.id;
-  };
-
   return (
-    <tr className={highlightColor} onClick={changeHighlightColor}>
+    <tr
+      className={props.isSelected ? "changeColor" : undefined}
+      onClick={props.handleClick}
+    >
       <th scope="row">{props.booking.id}</th>
       <td>{props.booking.title}</td>
       <td>{props.booking.firstName}</td>
@@ -36,7 +24,10 @@ const TableRow = props => {
       <td>{props.booking.checkOutDate}</td>
       <td>{nights(props.booking.checkOutDate, props.booking.checkInDate)}</td>
       <td>
-        <button className="btn btn-primary" onClick={handleProfile}>
+        <button
+          className="btn btn-primary"
+          onClick={() => props.setShowProfile(props.booking.id)}
+        >
           Show profile
         </button>
       </td>
@@ -45,6 +36,25 @@ const TableRow = props => {
 };
 
 const SearchResults = props => {
+  const [selectedRows, setSelectedRows] = useState([]);
+  //removes or adds an index to the selectedRows state array variable
+  const toggleSelectedAtPosition = index => {
+    // check if the given index is in the selectedRow array
+    if (selectedRows.includes(index)) {
+      // if it is:
+      // create a new array without the index
+      const newArray = selectedRows.filter(i => i !== index);
+      // selectedRows with this new array
+      setSelectedRows(newArray);
+    } else {
+      // if it's NOT:
+      // create a new array which includes this index
+      const newArray = selectedRows.concat(index);
+      // selectedRows with this new array
+      setSelectedRows(newArray);
+    }
+  };
+
   return (
     <div>
       <table className="table text-center">
@@ -64,11 +74,16 @@ const SearchResults = props => {
         </thead>
         <tbody>
           {props.results.map((booking, index) => (
-            <TableRow key={index} booking={booking} />
+            <TableRow
+              key={index}
+              booking={booking}
+              setShowProfile={props.onShowCustomerProfile}
+              handleClick={() => toggleSelectedAtPosition(index)}
+              isSelected={selectedRows.includes(index)}
+            />
           ))}
         </tbody>
       </table>
-      <CustomerProfile id={props.results.id} />
     </div>
   );
 };
