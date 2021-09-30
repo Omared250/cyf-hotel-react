@@ -71,3 +71,9 @@ tr {
 .changeColor {
   background-color: rgb(182, 243, 243);
 }
+
+.input-size {
+  width: 50%;
+  margin-bottom: 1em;
+  margin-top: -10px;
+}

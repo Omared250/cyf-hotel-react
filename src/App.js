@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import Bookings from "./components/Bookings";
 import "./App.css";
 import Restaurant from "./components/Restaurant";
+import NewBooking from "./components/NewBooking";
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
       <Bookings />
       <Restaurant />
       <TouristInfoCard />
+      <NewBooking />
       <Footer />
     </div>
   );
