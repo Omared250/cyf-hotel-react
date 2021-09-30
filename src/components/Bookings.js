@@ -14,7 +14,7 @@ const Bookings = () => {
   useEffect(() => {
     setIsLoading(true);
 
-    fetch(`https://cyf-react.glitch.me/error`)
+    fetch(`https://cyf-react.glitch.me`)
       .then(res => res.json())
       .then(data => {
         if (data.error) throw new Error(data.error);

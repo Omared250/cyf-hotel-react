@@ -3,7 +3,7 @@ import React from "react";
 const TouristInfoCards = () => (
   <div className="d-flex flex-row justify-content-center">
     <TouristInfoCard
-      imgSrc="https://peoplemakeglasgow.com/images/IntroducingGlasgow/Queens_Drive.jpg"
+      imgSrc="https://peoplemakeglasgow.com/imager/general/76609/West-end-Kelvingrove-Art-Gallery-Content-Block_11e6b377409ad0b26f1269c19e5bbf18.jpg"
       cityLink="https://peoplemakeglasgow.com"
       cityName="Glasglow"
       cityDescription="Glasgow (Glaschu in Scottish Gaelic, or Glesga in Scottish), officially City of Glasgow, is a city and a council of Scotland, in the United Kingdom.2 3 It is the largest city in Scotland and the third in the United Kingdom after London and Birmingham, and is the UK's most populous council and 10th most populous metropolitan area in its Greater Glasgow conurbation, after Greater London."
