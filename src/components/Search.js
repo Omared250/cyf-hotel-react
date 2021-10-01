@@ -9,8 +9,6 @@ const Search = props => {
     props.search(searchInput);
   };
 
-  console.log(handleSubmit);
-
   return (
     <div className="search">
       <div className="page-header">

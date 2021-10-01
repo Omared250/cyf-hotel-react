@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import moment from "moment";
+import NewBooking from "./NewBooking";
 
 const nights = (a, b) => {
   const firstMoment = moment(a);
@@ -9,6 +10,33 @@ const nights = (a, b) => {
 };
 
 const TableRow = props => {
+  return (
+    <tr
+      className={props.isSelected ? "changeColor" : undefined}
+      onClick={props.handleClick}
+    >
+      <th scope="row">{props.booking.id}</th>
+      <td>{props.booking.title}</td>
+      <td>{props.booking.firstName}</td>
+      <td>{props.booking.surname}</td>
+      <td>{props.booking.email}</td>
+      <td>{props.booking.roomId}</td>
+      <td>{props.booking.checkInDate}</td>
+      <td>{props.booking.checkOutDate}</td>
+      <td>{nights(props.booking.checkOutDate, props.booking.checkInDate)}</td>
+      <td>
+        <button
+          className="btn btn-primary"
+          onClick={() => props.setShowProfile(props.booking.id)}
+        >
+          Show profile
+        </button>
+      </td>
+    </tr>
+  );
+};
+
+const NewTableRow = props => {
   return (
     <tr
       className={props.isSelected ? "changeColor" : undefined}
