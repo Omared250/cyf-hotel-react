@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import CustomerProfile from "./CustomerProfile.js";
+import NewBooking from "./NewBooking.js";
 import Search from "./Search.js";
 import SearchResults from "./SearchResults.js";
-import NewBooking from "./NewBooking.js";
-// import FakeBookings from "../data/fakeBookings.json";
 
 const Bookings = () => {
   const [bookings, setBookings] = useState([]);
@@ -11,6 +10,7 @@ const Bookings = () => {
   const [customerProfileId, setCustomerProfileId] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
+  const [newBooking, setNewBooking] = useState();
 
   useEffect(() => {
     setIsLoading(true);
@@ -39,6 +39,10 @@ const Bookings = () => {
     // keep tracking the value of the input to re-render the page with the new value
   }, [searchVal]);
 
+  const addToBookings = () => {
+    setNewBooking([...bookings, newBooking]);
+  };
+
   return (
     <div className="App-content">
       <div className="container">
@@ -50,9 +54,11 @@ const Bookings = () => {
           <SearchResults
             results={bookings}
             onShowCustomerProfile={setCustomerProfileId}
+            data={newBooking}
           />
         )}
         {customerProfileId && <CustomerProfile id={customerProfileId} />}
+        <NewBooking onSubmit={addToBookings} />
       </div>
     </div>
   );
